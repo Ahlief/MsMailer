@@ -36,7 +36,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'david@mibuenordenador.com',0),(2,'nikodvdrf@hotmail.com',0),(3,'nikodvdrf@gmail.com',0),(4,'eldesvan@live.com',0),(5,'mibuor@outlook.com',0),(6,'freashart@hotmail.com',1),(7,'belfeorondo@gmail.com',1),(8,'adinternet16@gmail.com',0);
+INSERT INTO `clientes` VALUES (1,'david@mibuenordenador.com',0),(2,'nikodvdrf@hotmail.com',0),(3,'nikodvdrf@gmail.com',0),(4,'eldesvan@live.com',0),(5,'mibuor@outlook.com',0),(6,'freashart@hotmail.com',1);
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
