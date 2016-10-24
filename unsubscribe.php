@@ -1,15 +1,39 @@
-<?php
-$link = "unsubscribe.php?id=$user['id']&validation_hash=".md5($user['id'].$SECRET_STRING);
-?>
-<a href="<?php $link ?>">Unsubscribe</a>
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<title>Desubscripción de nuestro servicio</title>
+		<style>
+			div.anuncio{margin: auto; 
+						background-color:#eee; 
+						border-radius: 30px; 
+						text-align: center; 
+						width: 360px;}
+		</style>
+		<?php
+			require 'class.ClientList.php';
+			$clientlist = new ClientList;
+			$hosting=$clientlist->getHosting();
+		?>
+	</head>
+	<body>
+		<div class="anuncio">
+			<h2>Servicio de desubscripción</h2>
+			<?php
+				if( isset($_REQUEST['i']) 
+					&& !empty($_REQUEST['i']) 
+					&& isset($_REQUEST['vh']) 
+					&& !empty($_REQUEST['vh']) ) {
 
-<?php
-function unsubscribe() {
-
-    $expected = md5( $user['id'] . $SECRET_STRING );
-
-    if( $_GET['verification_hash'] != $expected )
-        throw new Exception("Validation failed.");
-
-    sql("UPDATE users SET wants_newsletter = FALSE WHERE id = " . escape($_GET['id']);
-}
+						//Aplicación de Desubscripción
+						$clientlist->checkSubscription($_REQUEST['i'], 
+														$_REQUEST['vh']); 	
+				}
+				else {
+						//Seguridad de Request, reenvio al hosting de la web
+						header("Location: $hosting");	
+				}
+			?>
+		</div>
+	</body>
+</html>
