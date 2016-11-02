@@ -1,9 +1,9 @@
-$query = <<<eof
-    LOAD DATA INFILE '$fileName'
-     INTO TABLE tableName
-     FIELDS TERMINATED BY '|' OPTIONALLY ENCLOSED BY '"'
-     LINES TERMINATED BY '\n'
-    (field1,field2,field3,etc)
-eof;
-
-$db->query($query);
+<?php 
+$sql ="LOAD DATA INFILE '/var/www/html/Msmailer/impo.csv' 
+		INTO TABLE cli 
+		FIELDS TERMINATED BY ',' 
+		ENCLOSED BY '\"'
+	  	LINES TERMINATED BY '\r\n'
+	  	IGNORE 1 LINES;";
+$db->query($sql);
+ ?>

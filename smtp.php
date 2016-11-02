@@ -1,4 +1,10 @@
 <?php
+    if (isset($_REQUEST['from']) && !empty($_REQUEST['from']) 
+            && isset($_REQUEST['pass']) && !empty($_REQUEST['pass']) 
+            && isset($_REQUEST['subjet']) && !empty($_REQUEST['subjet'])
+            && isset($_REQUEST['fromname']) && !empty($_REQUEST['fromname']) ) {
+        
+    }
 	require "phpmailer/PHPMailerAutoload.php";
 	$mail = new PHPMailer;
 	
@@ -24,23 +30,12 @@
 		$mail->addBCC($row['email']);							
 		
 		try{
-			
-			if(!$mail->send()) {								// Comprobar envio satisfactorio
-				
-				///////////////////////////////////////////////////////
-				// Aquí irá el registro de envios [[FALLIDOS]]
-				///////////////////////////////////////////////////////
-
-				echo "No se pudo enviar el mensaje al correo:".$row['email'];
-				echo "Mailer Error: " . $mail->ErrorInfo;
-			} 
-			else {
-
-				///////////////////////////////////////////////////////
-				// Aquí irá el registro de envios [[CORRECTOS]]
-				///////////////////////////////////////////////////////
-
-			}
+                    if(!$mail->send()) {								// Comprobar envio satisfactorio
+                        $clientlist->addError($row['id']);
+                    } 
+                    else {
+                       $clientlist->addEnviado($row['id']);
+                    }
 		}
 		catch (Exception $e) {
 			echo "No se puede continuar: ", $e->getMessage(), "\n";	// Registro de Excepción al enviar
@@ -48,4 +43,3 @@
 
 	$mail->clearBCCs(); 										// Eliminar lista de envios para evitar duplicados
 	}
-?>
